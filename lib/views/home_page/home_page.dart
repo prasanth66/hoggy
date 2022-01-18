@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hoggy/views/home_page/widgets/interaction_background.dart';
+import 'package:hoggy/views/home_page/widgets/interaction_item.dart';
 import 'package:lottie/lottie.dart';
 
 
@@ -25,7 +26,6 @@ class _HomePageState extends State<HomePage> {
    readJsonData() async {
     String data = await DefaultAssetBundle.of(context).loadString("assets/json/interaction_reference.json");
     final jsonResult = jsonDecode(data);
-    print("hi");
     setState(() {
       interactionReference = jsonResult;
     });
@@ -40,7 +40,8 @@ class _HomePageState extends State<HomePage> {
         child:interactionReference.length<=0? Center(child: CircularProgressIndicator()):
         Stack(
           children: [
-            InteractionBackground(interactionReference[0]["attrs"]),
+            InteractionBackground(interactionReference[1]["attrs"]),
+            for(var item in interactionReference[1]["children"] ) InteractionItem(item)
           ],
         ),
       ),
