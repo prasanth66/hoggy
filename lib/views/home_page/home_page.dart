@@ -17,11 +17,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
    var interactionReference = [];
+   int index = 0 ;
   @override
   void initState() {
     super.initState();
      readJsonData();
 
+  }
+  onButtonClick(){
+    setState(() {
+      index = (index+1)%(interactionReference.length);
+    });
   }
    readJsonData() async {
     String data = await DefaultAssetBundle.of(context).loadString("assets/json/interaction_reference.json");
@@ -37,13 +43,28 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey,
       body: Container(
         padding: EdgeInsets.all(16),
-        child:interactionReference.length<=0? Center(child: CircularProgressIndicator()):
-        Stack(
+        child:Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InteractionBackground(interactionReference[1]["attrs"]),
-            for(var item in interactionReference[1]["children"] ) InteractionItem(item)
+            interactionReference.length<=0? Center(child: CircularProgressIndicator()):
+            Flexible(
+              child: Stack(
+                children: [
+                  InteractionBackground(interactionReference[index]["attrs"]),
+                  for(var item in interactionReference[index]["children"] ) InteractionItem(item)
+                ],
+              ),
+            ),
+            CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.red,
+              child:IconButton(
+                  onPressed: onButtonClick,
+                  icon: Icon(Icons.arrow_forward)
+              )
+            )
           ],
-        ),
+        )
       ),
 
     );
