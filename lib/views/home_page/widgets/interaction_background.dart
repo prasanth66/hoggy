@@ -11,8 +11,10 @@ class InteractionBackground extends StatefulWidget {
 }
 
 class _InteractionBackgroundState extends State<InteractionBackground> {
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(

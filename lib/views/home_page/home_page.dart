@@ -45,9 +45,10 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.all(16),
         child:Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             interactionReference.length<=0? Center(child: CircularProgressIndicator()):
-            Flexible(
+            Expanded(
               child: Stack(
                 children: [
                   InteractionBackground(interactionReference[index]["attrs"]),
@@ -55,6 +56,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            SizedBox(width: 16,),
             CircleAvatar(
                 radius: 30,
                 backgroundColor: Colors.red,
