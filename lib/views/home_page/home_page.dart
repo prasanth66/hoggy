@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: Stack(
                 children: [
-                  InteractionBackground(interactionReference[index]["attrs"]),
+                  InteractionBackground(interactionReference[index]["attrs"],),
                   for(var item in interactionReference[index]["children"] ) InteractionItem(item)
                 ],
               ),
